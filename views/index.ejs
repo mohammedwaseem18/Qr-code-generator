@@ -1,0 +1,31 @@
+<!-- views/index.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate QR Code</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <form id="qrForm">
+        <label for="url">Enter URL:</label>
+        <input type="text" id="url" name="url" required>
+        <input type="submit" value="Generate QR Code">
+    </form>
+    <div id="qrCode"></div>
+
+    <script>
+        $('#qrForm').on('submit', function (e) {
+            e.preventDefault();
+            $.post('/generateQR', { url: $('#url').val() }, function (data) {
+                $('#qrCode').html(data);
+            });
+        });
+    </script>
+</body>
+
+</html>
